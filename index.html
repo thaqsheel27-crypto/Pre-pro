@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Corporate Architects & Workplace Interior Design | Obliq Associates India</title>
+<meta name="description" content="Award‑winning architecture & workplace interiors in India. Strategy to delivery—sustainable offices, LEED/WELL, MEP coordination, fast execution in Bengaluru & across India.""/>
+
+<!-- Updated favicon -->
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/dvpmvben2/image/upload/v1757580005/Screenshot_2025-09-11_at_2.08.02_PM_p2euse.png">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/dvpmvben2/image/upload/v1757580005/Screenshot_2025-09-11_at_2.08.02_PM_p2euse.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://res.cloudinary.com/dvpmvben2/image/upload/v1757580005/Screenshot_2025-09-11_at_2.08.02_PM_p2euse.png" />
+
+<style>
+  :root{
+    --c0:#F8FAFC; --c1:#D9EAFD; --c2:#BCCCDC; --c3:#9AA6B2;
+    --paper:var(--c0); --ink:#1a202c; --muted:#64748b; --line:#e2e8f0;
+    --glass:rgba(255,255,255,.75);
+    --shadow-1:0 10px 30px rgba(0,0,0,.06);
+    --shadow-2:0 18px 55px rgba(0,0,0,.12);
+    --radius:18px;
+    --h2:clamp(1.6rem,1.1rem + 2vw,2.6rem);
+    --btn-primary:#22c55e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font:400 1rem/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial; color:var(--ink); background:var(--paper)}
+  a{color:inherit; text-decoration:none}
+  .container{width:min(1200px,92%); margin-inline:auto}
+
+  /* Header: fixed overlay (transparent at top; glass on scroll) */
+  .site-header{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:transparent; border-bottom:1px solid transparent;
+    backdrop-filter:none;
+    transition:background .25s ease, backdrop-filter .25s ease, border-color .25s ease;
+  }
+  .site-header.scrolled{
+    backdrop-filter:saturate(140%) blur(12px);
+    background:var(--glass);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:14px 0}
+  .brand{display:flex; align-items:center; gap:12px; font-weight:800}
+  .brand img{height:36px; width:auto; border-radius:8px}
+  .nav-links{display:flex; gap:22px; align-items:center}
+  .nav-links a{padding:8px 10px; border-radius:10px; transition:color .25s ease, background .25s ease}
+  .menu-toggle{display:none; border:0; background:transparent; padding:8px}
+  .menu-toggle span{display:block; width:24px; height:2px; margin:5px 0; border-radius:2px; transition:background .25s ease}
+  @media (max-width:860px){
+    .menu-toggle{display:block}
+    .nav-links{
+      position:fixed; inset:64px 0 auto 0; background:var(--paper);
+      border-bottom:1px solid var(--line); padding:16px; display:none; flex-direction:column
+    }
+    .nav-links.open{display:flex}
+  }
+
+  /* Dynamic nav colors */
+  .site-header:not(.scrolled){
+    --nav-ink:#ffffff;
+    --nav-hover-bg:rgba(255,255,255,.18);
+  }
+  .site-header.scrolled{
+    --nav-ink:#000000; /* Black text when scrolled */
+    --nav-hover-bg:rgba(217,234,253,.55);
+  }
+  .site-header .brand,
+  .site-header .nav-links a{ color:var(--nav-ink); }
+  .site-header .nav-links a:hover,
+  .site-header .nav-links a.active{
+    background:var(--nav-hover-bg);
+    color:var(--nav-ink);
+  }
+  .site-header .menu-toggle span{ background:var(--nav-ink); }
+  .site-header:not(.scrolled) .brand,
+  .site-header:not(.scrolled) .nav-links a{
+    text-shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+  .site-header:not(.scrolled) .brand img{
+    filter:drop-shadow(0 2px 10px rgba(0,0,0,.35));
+  }
+  @media (max-width:860px){
+    .site-header .nav-links.open a{
+      color:var(--ink) !important;
+      text-shadow:none;
+    }
+  }
+
+  /* STICKY VIDEO ZONE */
+  .video-zone{position:relative; height:210vh;}
+  .sticky-layer{position:sticky; top:0; height:100vh; overflow:hidden; display:grid; place-items:center; isolation:isolate;}
+  .bg-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2}
+  .scrim{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.58)); z-index:-1}
+
+  .center-wrap{
+    max-width:1000px; padding:0 16px; text-align:center; color:#fff;
+    text-shadow:0 2px 18px rgba(0,0,0,.45);
+    transform:translateY(var(--floatY,0px)); will-change:transform, opacity;
+    transition:opacity .35s ease;
+  }
+  .hero-msg{font-weight:400; line-height:1.3; font-size:26px; font-family:"Helvetica Neue", Arial, ui-sans-serif; opacity:0; transition:opacity .35s ease;}
+  .hero-msg a.btn.primary{font-size:1rem; color:#fff; margin-top:16px;} /* Ensure button text is white for contrast */
+
+  .counter-overlay{position:absolute; inset:0; display:grid; place-items:end center; padding-bottom:12vh; text-align:center; color:#fff; opacity:0; transition:opacity .6s ease;}
+  .counter-overlay.show{opacity:1}
+  .counter-overlay.done{opacity:0}
+  .glass-metric{display:flex; flex-direction:column; align-items:center; gap:6px; padding:14px 18px; border-radius:14px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28); backdrop-filter: blur(10px) saturate(140%); box-shadow:0 10px 30px rgba(0,0,0,.18); min-width:min(86%, 520px);}
+  .glass-metric .label{font-weight:700; letter-spacing:.01em; opacity:.95; font-size:clamp(1rem, .9rem + .7vw, 1.25rem);}
+  .glass-metric #sqft{font:800 clamp(2rem,1.6rem + 3.2vw,3.2rem)/1 ui-sans-serif;}
+  .glass-metric .suffix{font-weight:700; margin-left:.25ch}
+
+  .section{padding:clamp(56px,8vw,96px) 0}
+  .strip{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff; box-shadow:var(--shadow-1)}
+  .row{display:flex; flex-wrap:wrap; gap:24px; padding:18px; justify-content:space-between;}
+  .cell{flex:1 1 calc(25% - 18px); min-width:200px; display:flex; align-items:center; gap:12px;}
+  .icon{width:38px; height:38px; border-radius:10px; border:1px solid var(--line); display:inline-block; background-position:center; background-repeat:no-repeat; background-size:contain; background-image:linear-gradient(135deg,var(--c1),var(--c2));}
+  @media (max-width:900px){ .cell{flex:1 1 calc(50% - 12px);} }
+  @media (max-width:520px){ .cell{flex:1 1 100%;} }
+
+  .ideas{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .idea{background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-1)}
+  .idea .ph{aspect-ratio:16/10; background:linear-gradient(90deg,var(--c1),var(--c2)); opacity:.22}
+  .idea .meta{padding:14px}
+  .tag{display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:#64748b; font-weight:700; font-size:.85rem; background:rgba(217,234,253,.35)}
+  @media (max-width:1024px){ .ideas{grid-template-columns:1fr 1fr} }
+  @media (max-width:600px){ .ideas{grid-template-columns:1fr} }
+
+  .world{border:1px solid var(--line); border-radius:16px; padding:18px; background:linear-gradient(180deg,#fff,#f5f9ff); box-shadow:var(--shadow-1)}
+  .world svg{width:100%; height:auto; display:block}
+  .dot{fill:#9AA6B2; opacity:.75; transition:fill 0.3s;}
+  .dot:hover{fill:#2a9d8f;}
+  .city-label{font-size:12px; fill:#64748b;}
+
+  .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:12px; border:1px solid var(--line); background:#fff; font-weight:700; cursor:pointer; box-shadow:var(--shadow-1)}
+  .btn.primary{background:var(--btn-primary); color:#fff; border-color:transparent}
+  .footer{background:#0f172a; color:#d1d5db; padding:60px 0 30px}
+  .footer a{color:#e5e7eb}
+  .f-grid{display:grid; grid-template-columns:1.2fr 1fr 1fr .8fr; gap:20px}
+  .f-title{color:#fff; font-weight:800; margin-bottom:10px}
+  .copyright{border-top:1px solid #2b3240; text-align:center; padding-top:18px; margin-top:28px; color:#93a1b5; font-size:.95rem}
+  @media (max-width:960px){ .f-grid{grid-template-columns:1fr 1fr} }
+  @media (max-width:640px){ .f-grid{grid-template-columns:1fr} }
+
+  /* Divider styles */
+  .divider { border: 0; height: 1px; background: linear-gradient(to right, transparent, var(--line), transparent); margin: 40px auto; width: 80%; }
+</style>
+<link rel="canonical" href="https://www.obliqassociates.com/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Obliq Associates",
+  "url": "https://www.obliqassociates.com/",
+  "logo": "https://res.cloudinary.com/dvpmvben2/image/upload/v1757580005/Screenshot_2025-09-11_at_2.08.02_PM_p2euse.png",
+  "sameAs": [
+    "https://www.instagram.com/obliqassociates",
+    "https://www.linkedin.com/company/obliq-associates"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bengaluru",
+    "addressRegion": "Karnataka",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "thaqsheel.vincent@obliqassociates.com"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.obliqassociates.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Projects",
+      "item": "https://www.obliqassociates.com/projects.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Sustainability",
+      "item": "https://www.obliqassociates.com/sustainability.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "About",
+      "item": "https://www.obliqassociates.com/about.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "Contact",
+      "item": "https://www.obliqassociates.com/contact.html"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <img src="https://res.cloudinary.com/dvpmvben2/image/upload/v1757580005/Screenshot_2025-09-11_at_2.08.02_PM_p2euse.png" alt="OBLIQ ASSOCIATES Logo">
+        OBLIQ ASSOCIATES
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html" class="active">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="sustainability.html">Sustainability</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Video Zone -->
+  <section class="video-zone" id="videoZone">
+    <div class="sticky-layer">
+      <video class="bg-video" id="bgVideo" autoplay muted loop playsinline>
+        <source src="https://res.cloudinary.com/dvpmvben2/video/upload/v1757851654/1757836310_1_nn5ojl.mp4" type="video/mp4"/>
+      </video>
+      <div class="scrim"></div>
+      <div class="center-wrap" id="msgWrap">
+        <p class="hero-msg" id="msg1" style="opacity:1">Delivering intelligent design solutions that bring out the best in people and organizations.</p>
+        <p class="hero-msg" id="msg2">We help organisations rethink the workplace—from strategy and design to engineering and delivery—so teams can do their best work</p>
+      </div>
+      <div class="counter-overlay" id="counterOverlay">
+        <div class="glass-metric">
+          <span class="label">Transformed spaces</span>
+          <span id="sqft">0</span><span class="suffix"> sq.ft</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Capabilities -->
+  <section class="section container">
+    <span class="eyebrow" style="display:inline-block; letter-spacing:.14em; text-transform:uppercase; color:#64748b; font-weight:800; font-size:.76rem; margin-bottom:8px">Capabilities</span>
+    <h2 style="font-size:var(--h2)">Integrated strategy, design, engineering & delivery</h2>
+    <div class="strip">
+      <div class="row">
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756995750/arlington-research-kN_kViDchA0-unsplash-min1756992886_igxkub.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Workplace strategy</strong><br><span style="color:#64748b">Brief, test-fits, change</span></div>
+        </div>
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756995757/lance-anderson-QdAAasrZhdk-unsplash-min1756992885_dekase.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Architecture</strong><br><span style="color:#64748b">Base build & core</span></div>
+        </div>
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756995756/austin-distel-wawEfYdpkag-unsplash_1_-min1756992885_elwvcw.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Interior design</strong><br><span style="color:#64748b">Materiality & brand</span></div>
+        </div>
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756995751/joakim-nadell-K67sBVqLLuw-unsplash-min1756992885_djgs9r.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Engineering</strong><br><span style="color:#64748b">MEP & systems</span></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756996092/christina-wocintechchat-com-glRqyWJgUeY-unsplash1756996066_kah8zr.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Technology</strong><br><span style="color:#64748b">Smart rooms & data</span></div>
+        </div>
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756996092/ricardo-gomez-angel-WsEAiVwGrwo-unsplash_1_1756996066_ms3p4g.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Sustainability</strong><br><span style="color:#64748b">LEED / WELL ready</span></div>
+        </div>
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756995750/jakub-zerdzicki-ykgLX_CwtDw-unsplash-min1756992886_d8wenq.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Cost & PM</strong><br><span style="color:#64748b">Budget & delivery</span></div>
+        </div>
+        <div class="cell">
+          <span class="icon" aria-hidden="true"
+            style="background:
+              center/contain no-repeat url('https://res.cloudinary.com/dvpmvben2/image/upload/v1756995750/ux-indonesia-qC2n6RQU4Vw-unsplash-min1756992886_k2yyut.jpg'),
+              linear-gradient(135deg,var(--c1),var(--c2));"></span>
+          <div><strong>Design & build</strong><br><span style="color:#64748b">One-team approach</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Insights -->
+  <section class="section container">
+    <span class="eyebrow" style="display:inline-block; letter-spacing:.14em; text-transform:uppercase; color:#64748b; font-weight:800; font-size:.76rem; margin-bottom:8px">Insights</span>
+    <h2 style="font-size:var(--h2)">The ideas shaping modern workplaces</h2>
+    <div class="ideas">
+      <article class="idea">
+        <img src="https://res.cloudinary.com/dvpmvben2/image/upload/v1756975902/ninthgrid-d6-bg-lCvZY-unsplash_m9wsgh.webp" 
+             alt="Workplace Strategy" style="width:100%; height:auto; object-fit:cover; aspect-ratio:16/10;">
+        <div class="meta">
+          <span class="tag">Workplace strategy</span>
+          <h3 style="margin:.6rem 0 .3rem">Hybrid neighborhoods for focus & flow</h3>
+          <p style="color:#64748b">Rethinking allocation between collaboration and deep work.</p>
+        </div>
+      </article>
+      <article class="idea">
+        <img src="https://res.cloudinary.com/dvpmvben2/image/upload/v1756989562/lycs-architecture-U2BI3GMnSSE-unsplash_1_byqbes.webp" 
+             alt="Sustainability" style="width:100%; height:auto; object-fit:cover; aspect-ratio:16/10;">
+        <div class="meta">
+          <span class="tag">Sustainability</span>
+          <h3 style="margin:.6rem 0 .3rem">Daylight, comfort and energy</h3>
+          <p style="color:#64748b">Using simulation to balance glare, lux levels and loads.</p>
+        </div>
+      </article>
+      <article class="idea">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&q=80&w=1080" 
+             alt="Technology in Workplace" style="width:100%; height:auto; object-fit:cover; aspect-ratio:16/10;">
+        <div class="meta">
+          <span class="tag">Technology</span>
+          <h3 style="margin:.6rem 0 .3rem">Smarter meeting experiences</h3>
+          <p style="color:#64748b">Sensors + analytics to right-size rooms and reduce friction.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Presence -->
+  <section class="section container">
+    <span class="eyebrow" style="display:inline-block; letter-spacing:.14em; text-transform:uppercase; color:#64748b; font-weight:800; font-size:.76rem; margin-bottom:8px">Presence</span>
+    <h2 style="font-size:var(--h2)">Delivering across India and beyond</h2>
+    <div class="world">
+      <svg viewBox="0 0 960 380" aria-hidden="true">
+        <rect width="960" height="380" fill="#ffffff"/>
+        <circle class="dot" cx="520" cy="180" r="8"/>
+        <text class="city-label" x="520" y="170">Bengaluru</text>
+        <circle class="dot" cx="600" cy="200" r="8"/>
+        <text class="city-label" x="600" y="190">Chennai</text>
+        <circle class="dot" cx="480" cy="220" r="8"/>
+        <text class="city-label" x="480" y="210">Hyderabad</text>
+      </svg>
+      <div style="color:#64748b; margin-top:8px">Bengaluru · Chennai · Hyderabad</div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container f-grid">
+      <div>
+        <div class="f-title">OBLIQ ASSOCIATES</div>
+        <p>Architecture for office, commercial infrastructure & interiors.</p>
+        <p>Bengaluru, Karnataka, India</p>
+      </div>
+      <div>
+        <div class="f-title">Company</div>
+        <p><a href="projects.html">Projects</a></p>
+        <p><a href="sustainability.html">Sustainability</a></p>
+        <p><a href="about.html">About</a></p>
+        <p><a href="contact.html">Contact</a></p>
+      </div>
+      <div>
+        <div class="f-title">Connect</div>
+        <p><a href="mailto:thaqsheel.vincent@obliqassociates.com">thaqsheel.vincent@obliqassociates.com</a></p>
+        <p><a href="https://www.linkedin.com/company/obliq-associates/" target="_blank" rel="noopener">LinkedIn</a></p>
+        <p><a href="https://www.instagram.com/obliqassociates" target="_blank" rel="noopener">Instagram</a></p>
+      </div>
+      <div>
+        <div class="f-title">Start</div>
+        <a class="btn primary" href="contact.html">Book a consultation</a>
+      </div>
+    </div>
+    <div class="container copyright">© 2025 OBLIQ ASSOCIATES. All rights reserved.</div>
+  </footer>
+
+<script>
+  // Mobile nav
+  const toggle=document.querySelector('.menu-toggle');
+  const links=document.querySelector('.nav-links');
+  toggle?.addEventListener('click',()=>links.classList.toggle('open'));
+
+  // Header glass on scroll
+  const header = document.getElementById('siteHeader');
+  const setHeaderGlass = () => {
+    if (window.scrollY > 2) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', setHeaderGlass, { passive:true });
+  setHeaderGlass();
+
+  // Scroll-driven hero text + metric
+  const zone = document.getElementById('videoZone');
+  const msgWrap = document.getElementById('msgWrap');
+  const msg1 = document.getElementById('msg1');
+  const msg2 = document.getElementById('msg2');
+  const overlay = document.getElementById('counterOverlay');
+  const sqftEl = document.getElementById('sqft');
+  const SHOW_METRIC_AT = 0.88, MSG_SWITCH_AT = 0.45, FLOAT_MAX = -30;
+  let metricStarted = false;
+
+  function progressInSticky(){
+    const r = zone.getBoundingClientRect();
+    const max = Math.max(1, r.height - window.innerHeight);
+    const scrolled = Math.min(Math.max(-r.top, 0), max);
+    return { p: scrolled / max, max, scrolled };
+  }
+
+  function update(){
+    const { p } = progressInSticky();
+    const floatY = (p * FLOAT_MAX);
+    msgWrap.style.setProperty('--floatY', floatY.toFixed(1) + 'px');
+    msg1.style.opacity = p < MSG_SWITCH_AT ? 1 : 0;
+    msg2.style.opacity = (p >= MSG_SWITCH_AT && p < SHOW_METRIC_AT) ? 1 : 0;
+    if (p >= SHOW_METRIC_AT) {
+      overlay.classList.add('show');
+      if (!metricStarted) {
+        metricStarted = true;
+        startCounter(100000, 1600);
+        setTimeout(()=> overlay.classList.add('done'), 5000);
+      }
+    } else {
+      overlay.classList.remove('show','done');
+      metricStarted = false; sqftEl.textContent = '0';
+    }
+  }
+  function startCounter(target, durationMs){
+    const start = performance.now();
+    function step(t){
+      const p = Math.min(1, (t - start) / durationMs);
+      sqftEl.textContent = String(Math.floor(target * p));
+      if (p < 1) requestAnimationFrame(step); else sqftEl.textContent = String(target) + '+';
+    }
+    requestAnimationFrame(step);
+  }
+  window.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update); update();
+
+  // Ensure video plays on mobile
+  const video = document.getElementById('bgVideo');
+  const tryPlay = () => video.play().catch(()=>{});
+  ['touchstart','click'].forEach(evt => {
+    window.addEventListener(evt, () => tryPlay(), { once: true });
+  });
+</script>
+
+<script>
+/* seo-aria-toggle */
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.querySelector('.menu-toggle');
+  var nav = document.querySelector('.nav-links');
+  if(btn && nav){
+    btn.addEventListener('click', function(){
+      var open = nav.classList.contains('open');
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+  }
+});
+</script>
+
+</body>
+</html>
