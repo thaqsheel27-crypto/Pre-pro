@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Office Architecture & Corporate Interior Projects | Obliq Associates</title>
-<meta name="description" content="Signature workplace projects across India—core & shell upgrades, office fitouts, sustainable interiors, engineering‑led delivery. Explore case studies & photos.""/>
+<title>OBLIQ ASSOCIATES — Projects</title>
+<meta name="description" content="Signature projects — office, commercial infrastructure and interiors across India."/>
 
 <!-- Updated favicon to match index.html -->
 <link rel="icon" type="image/png" href="https://res.cloudinary.com/dvpmvben2/image/upload/v1757580005/Screenshot_2025-09-11_at_2.08.02_PM_p2euse.png">
@@ -182,45 +182,6 @@
   /* Divider styles */
   .divider { border: 0; height: 1px; background: linear-gradient(to right, transparent, var(--line), transparent); margin: 40px auto; width: 80%; }
 </style>
-<link rel="canonical" href="https://www.obliqassociates.com/projects.html"/>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://www.obliqassociates.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Projects",
-      "item": "https://www.obliqassociates.com/projects.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Sustainability",
-      "item": "https://www.obliqassociates.com/sustainability.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "About",
-      "item": "https://www.obliqassociates.com/about.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 5,
-      "name": "Contact",
-      "item": "https://www.obliqassociates.com/contact.html"
-    }
-  ]
-}
-</script>
 </head>
 <body>
 
@@ -231,7 +192,7 @@
         <img src="https://res.cloudinary.com/dvpmvben2/image/upload/v1757580005/Screenshot_2025-09-11_at_2.08.02_PM_p2euse.png" alt="OBLIQ ASSOCIATES Logo">
         OBLIQ ASSOCIATES
       </a>
-      <button class="menu-toggle" aria-expanded="false" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="projects.html" class="active">Projects</a>
@@ -332,7 +293,7 @@
     <button class="lb-next" aria-label="Next image">›</button>
     <figure>
       <div class="lb-title"><span class="t"></span></div>
-      <img class="lb-img" alt="Project image">
+      <img class="lb-img" alt="">
     </figure>
     <div class="lb-counter" aria-live="polite"></div>
   </div>
@@ -363,7 +324,23 @@
       </div>
     </div>
     <div class="container copyright">© 2025 OBLIQ ASSOCIATES. All rights reserved.</div>
-  </footer>
+  
+<section class="case-links" style="max-width:1100px;margin:40px auto;padding:0 16px">
+  <h2 style="font-size:clamp(1.6rem,1rem+1.6vw,2.2rem);margin:0 0 10px">Featured Case Studies</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    <a class="card" href="/projects/hyderabad-office.html" style="text-decoration:none;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px">
+      <strong>Hyderabad Corporate Office</strong><br><span style="color:#64748b">View case study →</span>
+    </a>
+    <a class="card" href="/projects/bengaluru-tech-park.html" style="text-decoration:none;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px">
+      <strong>Bengaluru Tech Park Workplace</strong><br><span style="color:#64748b">View case study →</span>
+    </a>
+    <a class="card" href="/projects/pune-rnd-center.html" style="text-decoration:none;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px">
+      <strong>Pune R&D Center</strong><br><span style="color:#64748b">View case study →</span>
+    </a>
+  </div>
+</section>
+
+</footer>
 
 <script>
   // Mobile nav
@@ -453,20 +430,5 @@
     if(e.key === 'Escape') closeLightbox();
   });
 </script>
-
-<script>
-/* seo-aria-toggle */
-document.addEventListener('DOMContentLoaded', function(){
-  var btn = document.querySelector('.menu-toggle');
-  var nav = document.querySelector('.nav-links');
-  if(btn && nav){
-    btn.addEventListener('click', function(){
-      var open = nav.classList.contains('open');
-      btn.setAttribute('aria-expanded', String(!open));
-    });
-  }
-});
-</script>
-
 </body>
 </html>
