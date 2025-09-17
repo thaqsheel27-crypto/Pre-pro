@@ -1107,5 +1107,45 @@
       const success = await submitToWeb3Forms(form, 'Contact section');
     });
 
-    // ===== Modal form -> Web3Forms =====
-    const mForm = document.getElementBy
+       // ===== Modal form -> Web3Forms =====
+    const mForm = document.getElementById('modalForm');
+    const mSubmitBtn = document.getElementById('m_submitBtn');
+
+    mForm?.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      toast('info','Submitting your enquiry...');
+
+      const name = document.getElementById('m_name')?.value?.trim();
+      const email = document.getElementById('m_email')?.value?.trim();
+      const phone = document.getElementById('m_phone')?.value?.trim();
+      const city = document.getElementById('m_city')?.value?.trim();
+      const message = document.getElementById('m_message')?.value?.trim();
+
+      if(!name || !email || !phone || !city || !message){
+        toast('error','Please fill all fields.');
+        return;
+      }
+      const phoneRegex = /^[0-9]{10,15}$/;
+      if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
+        toast('error','Please enter a valid phone number (10-15 digits).');
+        return;
+      }
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(email)) {
+        toast('error','Please enter a valid email address.');
+        return;
+      }
+
+      const ok = await submitToWeb3Forms(mForm, 'Modal');
+      if(ok){
+        // Close the modal on success
+        if(typeof leadModal.close === 'function'){ leadModal.close(); }
+        else{ leadModal.removeAttribute('open'); }
+      }
+    });
+
+    // ===== Keep current year in footer =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
